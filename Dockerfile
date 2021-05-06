@@ -1,7 +1,7 @@
 FROM ubuntu:bionic
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV WEBMIN_VERSION 1.941
+ENV WEBMIN_VERSION 1.974
 
 RUN apt update && apt install -y curl tar perl libnet-ssleay-perl libauthen-pam-perl expect tzdata supervisor samba && \
     mkdir /opt/webmin && curl -sSL https://sourceforge.net/projects/webadmin/files/webmin/${WEBMIN_VERSION}/webmin-${WEBMIN_VERSION}.tar.gz/download | tar xz -C /opt/webmin --strip-components=1 && \
