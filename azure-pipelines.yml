@@ -8,7 +8,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  ImageName: 'filemin-docker:latest'
+  ImageName: 'smbwebmin-docker:latest'
 
 stages:
 - stage: Build
@@ -21,7 +21,7 @@ stages:
       displayName: 'Build the Docker image'
       inputs:
         containerRegistry: 'Docker Hub'
-        repository: 'dejan995/filemin-docker'
+        repository: 'dejan995/smbwebmin-docker'
         command: 'build'
         Dockerfile: '**/Dockerfile'
         buildContext: '.'
@@ -30,7 +30,7 @@ stages:
       displayName: 'Push the Docker image to Dockerhub'
       inputs:
         containerRegistry: 'Docker Hub'
-        repository: 'dejan995/filemin-docker'
+        repository: 'dejan995/smbwebmin-docker'
         command: 'push'
         tags: 'latest'
       condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) 
