@@ -1,0 +1,15 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+name : Sync
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: gitsync@1
+  inputs:
+    GitRepoUrl: 'https://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@github.com/dejan995/smbwebmin-docker.git'
