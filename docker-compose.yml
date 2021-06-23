@@ -18,6 +18,8 @@ services:
             - etc_samba:/etc/samba
             - var_lib_samba:/var/lib/samba
             - ${ROOT_SHARE_FOLDER}:/mnt
+        environment: 
+            - WEBMIN_PASSWORD=${WEBMIN_PASSWORD}
 
 volumes:
     etc_webmin:

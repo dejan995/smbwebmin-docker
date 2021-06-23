@@ -23,7 +23,7 @@ fi
 
 if [ ! "${WEBMIN_PASSWORD}" = "admin" ];then
     echo "Changing password for admin"
-    /opt/webmin/changepass.pl /etc/webmin admin ${WEBMIN_PASS}
+    /opt/webmin/changepass.pl /etc/webmin admin ${WEBMIN_PASSWORD}
 fi
 
 exec "$@"
