@@ -12,4 +12,4 @@ pool:
 steps:
 - task: gitsync@1
   inputs:
-    GitRepoUrl: 'https://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@github.com/dejan995/smbwebmin-docker.git'
+    GitRepoUrl: 'https://$(MYPAT)@github.com/dejan995/smbwebmin-docker.git'
