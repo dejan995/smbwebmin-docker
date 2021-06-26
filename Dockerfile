@@ -21,7 +21,11 @@ RUN apt update && apt install -y curl tar perl libnet-ssleay-perl libauthen-pam-
     ln -s /dev/stderr /var/webmin/miniserv.error && \
     /opt/webmin/setup.sh && \
     sed -e 's/^start_cmd=.*/start_cmd=supervisorctl start smbd nmbd/g' -e 's/^restart_cmd=.*/restart_cmd=supervisorctl restart smbd nmbd/g' -e 's/^stop_cmd=.*/stop_cmd=supervisorctl stop smbd nmbd/g' -i /etc/webmin/samba/config && \
-    chmod +x entrypoint.sh
+    chmod +x entrypoint.sh && \
+    apt autoremove --purge && \
+    apt autoremove && \
+    apt clean && \
+    rm -rf /var/lib/apt
 
 EXPOSE 10000
 
