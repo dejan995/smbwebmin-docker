@@ -12,29 +12,7 @@ services:
             - 139:139
             - 445:445
         volumes: 
-            - etc_webmin:/etc/webmin
-            - etc_samba:/etc/samba
-            - var_lib_samba:/var/lib/samba
+            - ${SMBWEBMIN_CONFIG}:/data
             - ${ROOT_SHARE_FOLDER}:/mnt
         environment: 
             - WEBMIN_PASSWORD=${WEBMIN_PASSWORD}
-
-volumes:
-    etc_webmin:
-      driver: local
-      driver_opts:
-        type: none
-        device: ${ETC_WEBMIN}
-        o: bind
-    etc_samba:
-        driver: local
-        driver_opts: 
-            type: none
-            device: ${ETC_SAMBA}
-            o: bind
-    var_lib_samba:
-        driver: local
-        driver_opts: 
-            type: none
-            device: ${VAR_LIB_SAMBA}
-            o: bind
