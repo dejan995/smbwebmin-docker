@@ -1,11 +1,9 @@
 version: '3.5'
 services: 
     smb-webmin:
-        build:
-            context: . 
         container_name: ${CONTAINER_NAME_SAMBA}
         restart: unless-stopped
-        image: smbwebmin:latest
+        image: dejan995/smbwebmin-docker:latest
         hostname: ${SAMBA_HOSTNAME}
         ports:
             - ${SAMBA_WEBUI_PORT}:10000
