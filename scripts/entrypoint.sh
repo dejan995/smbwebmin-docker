@@ -26,4 +26,12 @@ if [ ! "${WEBMIN_PASSWORD}" = "admin" ];then
     /opt/webmin/changepass.pl /etc/webmin admin ${WEBMIN_PASSWORD}
 fi
 
+if [ ! -d "/data" ]; then
+  ln -s /etc/samba/* /data/samba/
+  ln -s /etc/webmin/* /data/webmin
+elif [ -z "$(ls -A /data)" ]; then
+  cp -a /etc/samba/. /data/samba/
+  cp -a /etc/webmin/. /data/webmin/
+fi
+
 exec "$@"
