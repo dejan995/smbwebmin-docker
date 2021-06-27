@@ -1,9 +1,10 @@
 version: '3.5'
 services: 
     smb-webmin:
-        container_name: ${CONTAINER_NAME_SAMBA}
+        build:
+            context: .
         restart: unless-stopped
-        image: dejan995/smbwebmin-docker:latest
+        image: smbwebmin:latest
         hostname: ${SAMBA_HOSTNAME}
         ports:
             - ${SAMBA_WEBUI_PORT}:10000
@@ -15,4 +16,5 @@ services:
             - ${SMBWEBMIN_CONFIG}:/data
             - ${ROOT_SHARE_FOLDER}:/mnt
         environment: 
+            - WEBMIN_LOGIN=${WEBMIN_LOGIN}  
             - WEBMIN_PASSWORD=${WEBMIN_PASSWORD}

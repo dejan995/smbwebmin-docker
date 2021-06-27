@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export WEBMIN_LOGIN="${WEBMIN_LOGIN:-admin}"
 export WEBMIN_PASSWORD="${WEBMIN_PASSWORD:-admin}"
 export USE_SSL="${USE_SSL:-true}"
 export BASE_URL="${BASE_URL:-localhost}"
@@ -21,9 +22,13 @@ if [ "${ALLOW_ONLY_SAMBA_RELATED_MODULES,,}" = true ]; then
     echo "admin: samba system-status backup-config changeuser webminlog webmin acl mount" >  /etc/webmin/webmin.acl
 fi
 
+if [ ! "${WEBMIN_LOGIN}" = "admin" ];then
+    echo "${WEBMIN_LOGIN}:${WEBMIN_PASSWORD}" >  /etc/webmin/miniserv.users
+fi
+
 if [ ! "${WEBMIN_PASSWORD}" = "admin" ];then
-    echo "Changing password for admin"
-    /opt/webmin/changepass.pl /etc/webmin admin ${WEBMIN_PASSWORD}
+    echo "Changing password for user ${WEBMIN_LOGIN}"
+    /opt/webmin/changepass.pl /etc/webmin ${WEBMIN_LOGIN} ${WEBMIN_PASSWORD}
 fi
 
 if [ ! -d "/data" ]; then
@@ -33,5 +38,7 @@ elif [ -z "$(ls -A /data)" ]; then
   cp -a /etc/samba/. /data/samba/
   cp -a /etc/webmin/. /data/webmin/
 fi
+
+/etc/webmin/stop
 
 exec "$@"
