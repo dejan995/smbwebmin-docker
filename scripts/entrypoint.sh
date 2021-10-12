@@ -19,7 +19,7 @@ if [ "${USE_SSL,,}" = true ] && [ -n "${BASE_URL+x}" ]; then
 fi
 
 if [ "${ALLOW_ONLY_SAMBA_RELATED_MODULES,,}" = true ]; then
-    echo "admin: samba system-status backup-config changeuser webminlog webmin acl mount" >  /etc/webmin/webmin.acl
+    echo "${WEBMIN_LOGIN}: samba system-status backup-config changeuser webminlog webmin acl mount" >  /etc/webmin/webmin.acl
 fi
 
 if [ ! "${WEBMIN_LOGIN}" = "admin" ];then
