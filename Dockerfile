@@ -1,7 +1,7 @@
 FROM ubuntu:focal
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV WEBMIN_VERSION 1.981
+ENV WEBMIN_VERSION 1.983
 ENV nostart=true
 ENV nouninstall=true
 ENV noportcheck=true
