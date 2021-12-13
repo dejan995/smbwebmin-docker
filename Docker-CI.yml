@@ -2,7 +2,7 @@ name : $(Date:ddMMyyyy)$(Rev:.rr)
 trigger:
   branches:
     include:
-      - maste
+      - master
  
 pool:
   vmImage: 'ubuntu-latest'
