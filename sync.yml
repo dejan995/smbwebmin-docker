@@ -22,7 +22,7 @@ jobs:
     steps:
     - task: gitsync@1
       inputs:
-       GitRepoUrl: 'https://dejan:$(MYPATGITLAB)@$(GITLAB_HOST)/$(GITLAB_USER)/smbwebmin-docker.git'
+       GitRepoUrl: 'https://$(GITLAB_USER):$(MYPATGITLAB)@$(GITLAB_HOST)/$(GITLAB_USER)/smbwebmin-docker.git'
     dependsOn: Git_Credentials
 
   - job: Sync_GitHub
