@@ -1,0 +1,32 @@
+image: jdrouet/docker-with-buildx:stable
+
+services:
+    - name: docker:20.10-dind
+      entrypoint: ["env", "-u", "DOCKER_HOST"]
+      command: ["dockerd-entrypoint.sh"]
+      alias: docker
+
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
+stages:
+  - Build & Push Docker Image
+
+Build & Push Docker Image:
+  stage: Build & Push Docker Image
+  script:
+    - export VERSION=$(date +%y.%m.%d)
+    - export IMAGE_NAME=dejan995/smbwebmin-docker
+    - docker login -u "$USER" -p "$PASSWORD"
+    - docker buildx create --use
+    - >
+      docker buildx build --platform linux/amd64,linux/arm64
+      -t $IMAGE_NAME:$VERSION
+      -t $IMAGE_NAME:latest
+      --push
+      .
+
+  only:
+    - master
