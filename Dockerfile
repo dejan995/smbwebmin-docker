@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 COPY /scripts/entrypoint.sh /
 COPY /scripts/supervisord.conf /
 
-RUN apt update && apt install -y curl tar perl libnet-ssleay-perl libauthen-pam-perl expect tzdata supervisor samba jq && \
+RUN apt update && apt install --no-install-recommends -y curl tar perl libnet-ssleay-perl libauthen-pam-perl expect tzdata supervisor samba jq && \
     export latestVer=$(curl -sL https://api.github.com/repos/webmin/webmin/releases/latest | jq -r ".tag_name") && \
     mkdir /opt/webmin && curl -sSL https://sourceforge.net/projects/webadmin/files/webmin/${latestVer}/webmin-${latestVer}.tar.gz/download | tar xz -C /opt/webmin --strip-components=1 && \
     mkdir -p /var/webmin/ && \
