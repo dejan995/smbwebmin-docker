@@ -22,14 +22,11 @@ if [ "${ALLOW_ONLY_SAMBA_RELATED_MODULES,,}" = true ]; then
     echo "${WEBMIN_LOGIN}: samba system-status backup-config changeuser webminlog webmin acl mount" >  /etc/webmin/webmin.acl
 fi
 
-if [ ! "${WEBMIN_LOGIN}" = "admin" ];then
-    echo "${WEBMIN_LOGIN}:${WEBMIN_PASSWORD}" >  /etc/webmin/miniserv.users
-fi
+echo "Setting username for ${WEBMIN_LOGIN}"
+echo "${WEBMIN_LOGIN}:${WEBMIN_PASSWORD}" >  /etc/webmin/miniserv.users
 
-if [ ! "${WEBMIN_PASSWORD}" = "admin" ];then
-    echo "Changing password for user ${WEBMIN_LOGIN}"
-    /opt/webmin/changepass.pl /etc/webmin ${WEBMIN_LOGIN} ${WEBMIN_PASSWORD}
-fi
+echo "Changing password for user ${WEBMIN_LOGIN}"
+/opt/webmin/changepass.pl /etc/webmin ${WEBMIN_LOGIN} ${WEBMIN_PASSWORD}
 
 if [ ! -d "/data" ]; then
   ln -s /etc/samba/* /data/samba/
